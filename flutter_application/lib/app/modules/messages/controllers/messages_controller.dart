@@ -162,6 +162,9 @@ class MessagesController extends GetxController {
     message.value = await _chatRepository.getMessage(message.value);
     message.value.readByUsers.add(_authService.user.value.id);
     _chatRepository.getChats(message.value).listen((event) {
+      event.forEach((element) {
+        Get.log(element.text);
+      });
       chats.assignAll(event);
     });
   }

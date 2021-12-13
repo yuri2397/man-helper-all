@@ -66,7 +66,6 @@ class ChatRepository {
   }
 
   Stream<QuerySnapshot> getUserMessages(String userId, {perPage = 10}) {
-    Get.log("USER ID : $userId");
     var a = FirebaseFirestore.instance
         .collection("messages")
         .where('visible_to_users', arrayContains: userId)
@@ -119,7 +118,6 @@ class ChatRepository {
   }
 
   Future<void> addMessage(Message message, Chat chat) {
-    Get.log("MESSAGE ID : " + message.id);
     return FirebaseFirestore.instance
         .collection("messages")
         .doc(message.id)

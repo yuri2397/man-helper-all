@@ -80,11 +80,6 @@ class MessagesView extends GetView<MessagesController> {
             await controller.listenForMessages();
           },
           child: conversationsList()),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.message),
-        backgroundColor: Colors.red,
-      ),
     );
   }
 }

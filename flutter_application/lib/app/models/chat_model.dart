@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +20,14 @@ class Chat extends Model {
 
   User user;
 
+  List<String> customMedia;
+
+  String customDescription;
+
+  double customPrice;
+
+  int customDate;
+
   Chat(this.text, this.time, this.userId, this.user);
 
   Chat.fromDocumentSnapshot(DocumentSnapshot jsonMap) {
@@ -25,7 +35,18 @@ class Chat extends Model {
       id = jsonMap.id;
       text = jsonMap.get('text') != null ? jsonMap.get('text').toString() : '';
       time = jsonMap.get('time') != null ? jsonMap.get('time') : 0;
-      userId = jsonMap.get('user') != null ? jsonMap.get('user').toString() : null;
+      userId =
+          jsonMap.get('user') != null ? jsonMap.get('user').toString() : null;
+      customPrice = jsonMap.get("custom_price") != null
+          ? jsonMap.get("custom_price")
+          : null;
+      customDescription = jsonMap.get("custom_desc") != null
+          ? jsonMap.get("custom_desc")
+          : null;
+
+      customDate = jsonMap.get("custom_date") != null
+          ? jsonMap.get("custom_date")
+          : null;
     } catch (e) {
       id = null;
       text = '';
@@ -49,8 +70,19 @@ class Chat extends Model {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      super == other && other is Chat && runtimeType == other.runtimeType && id == other.id && text == other.text && time == other.time && userId == other.userId;
+      super == other &&
+          other is Chat &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          text == other.text &&
+          time == other.time &&
+          userId == other.userId;
 
   @override
-  int get hashCode => super.hashCode ^ id.hashCode ^ text.hashCode ^ time.hashCode ^ userId.hashCode;
+  int get hashCode =>
+      super.hashCode ^
+      id.hashCode ^
+      text.hashCode ^
+      time.hashCode ^
+      userId.hashCode;
 }
